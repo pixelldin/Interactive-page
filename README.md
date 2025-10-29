@@ -69,5 +69,4 @@ To deploy:
 
 Your page will be live at:
 
-```
 https://https://github.com/pixelldin/Interactive-page.git/

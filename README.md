@@ -73,9 +73,4 @@ To deploy:
 Your page will be live at:
 
 ```
-https://<your-username>.github.io/<your-repo-name>/
-
-
-## 📄 License
-
-This project is open source and available under the [MIT License](https://chatgpt.com/c/LICENSE).
+https://https://github.com/pixelldin/Interactive-page.git/

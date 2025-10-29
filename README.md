@@ -11,7 +11,7 @@ It includes basic interactivity such as button clicks, animations, and dynamic c
 ---
 
 ## 🌐 Live Demo
-Check it out here → [**Live Page on GitHub Pages**] https://pixelldin.github.io/Interactive-page
+Check it out here → [**Live Page on GitHub Pages**] (https://pixelldin.github.io/Interactive-page/)
 
 *(Replace the above link with your actual GitHub Pages URL)*
 

@@ -5,15 +5,13 @@ Here’s a clean and realistic `README.md` you can use for a **simple interactiv
 ```markdown
 # Interactive Web Page
 
-A simple and responsive web page built using **HTML**, **CSS**, and **JavaScript**.
+A simple and responsive web page built using **HTML**.
 It includes basic interactivity such as button clicks, animations, and dynamic content updates.
 
 ---
 
 ## 🌐 Live Demo
 Check it out here → [**Live Page on GitHub Pages**] (https://pixelldin.github.io/Interactive-page/)
-
-*(Replace the above link with your actual GitHub Pages URL)*
 
 ---
 
@@ -31,8 +29,6 @@ my-webpage/
 
 - **index.html** – Main webpage structure
 - **style.css** – Styling and layout
-- **script.js** – Handles user interaction and animations
-- **README.md** – Project documentation
 
 ---
 

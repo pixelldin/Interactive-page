@@ -11,7 +11,7 @@ It includes basic interactivity such as button clicks, animations, and dynamic c
 ---
 
 ## 🌐 Live Demo
-Check it out here → [**Live Page on GitHub Pages**](https://<your-username>.github.io/<your-repo-name>/)
+Check it out here → [**Live Page on GitHub Pages**] https://pixelldin.github.io/Interactive-page
 
 *(Replace the above link with your actual GitHub Pages URL)*
 
@@ -39,7 +39,7 @@ my-webpage/
 ## ⚙️ How to Run Locally
 1. Clone the repository
    ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
+   git clone https://github.com/pixelldin/Interactive-page.git
 
 ```
 

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Chosen Palette: Warm Neutral & Slate -->
+    <!-- Application Structure Plan: A top-down interactive flowchart (built with HTML/CSS) visualizing the CI/CD pipeline. Clicking a component (e.g., 'Jenkins') scrolls to and populates a 'Details' section with explanatory text and context. This dashboard-like, single-flow structure directly maps to the report's process-oriented content, making the complex pipeline easy to understand step-by-step. -->
+    <!-- Visualization & Content Choices: Report Info: CI/CD process flow -> Goal: Organize/Explain -> Viz/Presentation Method: Interactive HTML/CSS flowchart (per "Organize" goal) -> Interaction: Click component -> JS updates 'Details' panel -> Justification: Directly visualizes the report's main content (a process) and provides interactive drill-down for learning, which is more effective than a static diagram. Library/Method: HTML/CSS/JS. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive CI/CD Pipeline Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .component-node {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .component-node:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .component-node.active {
+            /* Replace invalid Tailwind utility-style properties with a valid CSS "ring" effect using box-shadow */
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1), 0 0 0 4px rgba(37,99,235,0.12);
+        }
+        .flow-arrow {
+            font-size: 2.5rem;
+            color: #9ca3af; 
+        }
+        @media (max-width: 768px) {
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            50: '#fafaf9',
+                            100: '#f5f5f4',
+                            800: '#292524'
+                        },
+                        slate: {
+                            600: '#475569',
+                            800: '#1e293b'
+                        },
+                        amber: {
+                            600: '#d97706'
+                        },
+                        blue: {
+                            600: '#2563eb'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-stone-50 text-slate-800">
+
+    <div class="container max-w-6xl mx-auto p-4 sm:p-8">
+        
+        <header class="text-center my-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">CI/CD Pipeline Explorer</h1>
+            <p class="text-lg text-slate-600 max-w-3xl mx-auto">
+                This is an interactive guide to your DevOps project. Click any component in the pipeline below to learn about its specific role, the tools involved, and how it contributes to the overall process.
+            </p>
+        </header>
+
+        <main>
+            <!-- Interactive Pipeline Diagram -->
+            <section id="pipeline-diagram" class="mb-12">
+                <h2 class="text-3xl font-semibold text-center text-slate-800 mb-8">Interactive Pipeline Flow</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center flex-wrap gap-4">
+
+                    <!-- Terraform -->
+                    <div class="component-node active w-full md:w-48 text-center p-6 bg-white rounded-xl shadow-md border border-gray-200" data-component="terraform" id="node-terraform">
+                        <div class="text-5xl mb-3">🛠️</div>
+                        <h3 class="text-xl font-semibold text-blue-600">Terraform</h3>
+                        <p class="text-sm text-slate-500">Infrastructure as Code</p>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <!-- GitHub -->
+                    <div class="component-node w-full md:w-48 text-center p-6 bg-white rounded-xl shadow-md border border-gray-200" data-component="github">
+                        <div class="text-5xl mb-3">📦</div>
+                        <h3 class="text-xl font-semibold text-blue-600">GitHub</h3>
+                        <p class="text-sm text-slate-500">Source Code</p>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <!-- Jenkins -->
+                    <div class="component-node w-full md:w-48 text-center p-6 bg-white rounded-xl shadow-md border border-gray-200" data-component="jenkins">
+                        <div class="text-5xl mb-3">⚙️</div>
+                        <h3 class="text-xl font-semibold text-blue-600">Jenkins</h3>
+                        <p class="text-sm text-slate-500">CI Server (Build/Test)</p>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+                    
+                    <!-- Docker -->
+                    <div class="component-node w-full md:w-48 text-center p-6 bg-white rounded-xl shadow-md border border-gray-200" data-component="docker">
+                        <div class="text-5xl mb-3">🐳</div>
+                        <h3 class="text-xl font-semibold text-blue-600">Docker</h3>
+                        <p class="text-sm text-slate-500">Containerize</p>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <!-- Tomcat/App Server -->
+                    <div class="component-node w-full md:w-48 text-center p-6 bg-white rounded-xl shadow-md border border-gray-200" data-component="app-server">
+                        <div class="text-5xl mb-3">🚀</div>
+                        <h3 class="text-xl font-semibold text-blue-600">App Server</h3>
+                        <p class="text-sm text-slate-500">Deploy & Run</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Component Details Section -->
+            <section id="details-section" class="bg-white p-6 sm:p-10 rounded-2xl shadow-lg border border-gray-200 scroll-mt-20">
+                <h2 class="text-3xl font-semibold text-slate-800 mb-6" id="details-title">Component Details</h2>
+                <div id="details-content" class="prose prose-lg max-w-none prose-h3:text-slate-700 prose-p:text-slate-600 prose-li:text-slate-600 prose-a:text-blue-600">
+                    <!-- Content is dynamically inserted here by JavaScript -->
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center text-slate-500 mt-12 py-6 border-t border-gray-200">
+            Generated Interactive Report
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nodes = document.querySelectorAll('.component-node');
+            const detailsContent = document.getElementById('details-content');
+            const detailsSection = document.getElementById('details-section');
+            const detailsTitle = document.getElementById('details-title');
+            
+            const componentData = {
+                'terraform': {
+                    title: 'Terraform (Infrastructure as Code)',
+                    content: `
+                        <p>This is the foundation of the entire project. Terraform is used to define and provision all the required cloud infrastructure as code. This ensures a repeatable, scalable, and secure environment.</p>
+                        <h3>Key Responsibilities:</h3>
+                        <ul>
+                            <li><strong>Create AWS VPC:</strong> Defines the isolated network, public subnets, route tables, and internet gateway.</li>
+                            <li><strong>Provision EC2 Instances:</strong> Creates the virtual servers for both the Jenkins (CI) Server and the Application (Deployment) Server.</li>
+                            <li><strong>Configure Security:</strong> Manages firewall rules (Security Groups) to control all traffic, enabling SSH access, Jenkins UI access, and public web access only where needed.</li>
+                            <li><strong>Scalability:</strong> The environment is built to be scalable from the start.</li>
+                        </ul>
+                    `
+                },
+                'github': {
+                    title: 'GitHub (Source Code Repository)',
+                    content: `
+                        <p>This is the starting point for the entire CI/CD flow. Developers work locally and push their code changes (e.g., the static website) to a GitHub repository.</p>
+                        <h3>Key Responsibilities:</h3>
+                        <ul>
+                            <li><strong>Source Control:</strong> Manages all versions of the application code and the <code>Dockerfile</code>.</li>
+                            <li><strong>Trigger:</strong> A <code>git push</code> event automatically triggers the Jenkins pipeline via a webhook, starting the CI process.</li>
+                        </ul>
+                    `
+                },
+                'jenkins': {
+                    title: 'Jenkins (CI Server)',
+                    content: `
+                        <p>Jenkins is the "brain" of the operation, hosted on its own EC2 instance. It automatically orchestrates the build, test, and deployment process as soon as code is pushed to GitHub.</p>
+                        <h3>Key Responsibilities (CI - Continuous Integration):</h3>
+                        <ul>
+                            <li><strong>Checkout:</strong> Pulls the latest code from GitHub.</li>
+                            <li><strong>Build (Maven):</strong> For a Java project, it would use Maven to compile code and package it into a <code>.war</code> file. For our static site, it prepares the files.</li>
+                            <li><strong>Test:</strong> Runs any automated tests to ensure code quality (step not explicitly in report but implied in CI).</li>
+                        </ul>
+                    `
+                },
+                'docker': {
+                    title: 'Docker (Containerization)',
+                    content: `
+                        <p>Docker is used to package the application (the <code>.war</code> file or static site) and all its dependencies into a lightweight, portable container image.</p>
+                        <h3>Key Responsibilities:</h3>
+                        <ul>
+                            <li><strong>Build Image:</strong> Jenkins executes a <code>docker build</code> command using the <code>Dockerfile</code> in the GitHub repo. This creates a self-contained image.</li>
+                            <li><strong>Package:</strong> The generated <code>.war</code> file (or static files) is copied into the image.</li>
+                            <li><strong>Portability:</strong> This image can now run identically on any machine that has Docker, eliminating "it works on my machine" problems.</li>
+                        </ul>
+                    `
+                },
+                'app-server': {
+                    title: 'Application Server (Deployment)',
+                    content: `
+                        <p>This is the final destination, a separate EC2 instance provisioned by Terraform. This server's only job is to run the final Docker container, making it secure and isolated.</p>
+                        <h3>Key Responsibilities (CD - Continuous Delivery):</h3>
+                        <ul>
+                            <li><strong>Host Docker:</strong> Runs the Docker daemon.</li>
+                            <li><strong>Deploy:</strong> Jenkins securely connects to this server (e.g., via SSH) and issues commands.</li>
+                            <li><strong>Run Container:</strong> Jenkins instructs Docker on this server to pull the new image and run it as a container, exposing the application (e.g., Tomcat or Nginx) to the world.</li>
+                        </ul>
+                    `
+                }
+            };
+
+            function updateDetails(componentName) {
+                const data = componentData[componentName];
+                
+                if (data) {
+                    detailsTitle.textContent = data.title;
+                    detailsContent.innerHTML = data.content;
+                }
+            }
+
+            nodes.forEach(node => {
+                node.addEventListener('click', (e) => {
+                    const clickedNode = e.currentTarget;
+                    const componentName = clickedNode.dataset.component;
+
+                    // Remove active state from all
+                    nodes.forEach(n => n.classList.remove('active', 'ring-blue-600'));
+                    
+                    // Add active state to clicked
+                    clickedNode.classList.add('active', 'ring-blue-600');
+                    
+                    // Update details
+                    updateDetails(componentName);
+
+                    // Scroll to details
+                    detailsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // Initialize with the first component
+            updateDetails('terraform');
+            document.getElementById('node-terraform').classList.add('active', 'ring-blue-600');
+
+        });
+    </script>
+</body>
+</html>
